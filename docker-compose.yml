@@ -1,0 +1,153 @@
+# version: '3.8'
+# services:
+#   # db:
+#   #   image: postgre
+
+#   # api_auth:
+#   #   build: ./GestSIS_Auth
+#   #   ports:
+#   #   - '8001:8001'
+
+#   # api_main:
+#   #   build: ./GestSIS_API
+#   #   ports:
+#   #   - '8000:8000'
+
+#   webapp:
+#     build: ./GestSIS_APP
+#     volumes:
+#     - './GestSIS_APP:/app'
+#     ports:
+#     - '8080:8080'
+#     command: /bin/sh -c "yarn serve"
+
+
+# version: "3.3"
+
+# services: 
+#   my_app:
+#     build: ./GestSIS_APP
+#     ports:
+#       - "8080:8080"
+#     volumes:
+#       - './GestSIS_APP:/app'
+#     stdin_open: true
+#     tty: true
+#     environment:
+#       - CHOKIDAR_USEPOLLING=true
+
+# version: '3'
+# services:
+#   front:
+#     container_name: front
+#     hostname: front
+#     build:
+#       context: ./GestSIS_APP
+#       dockerfile: dev.dockerfile
+#     volumes:
+#       - ./front:/usr/front
+#       - /usr/front/node_modules
+#     environment:
+#       - PORT=80
+#       - NODE_ENV=development
+
+# version: '3'
+# services:
+#   frontend:
+#     container_name: frontend
+#     restart: always
+#     build:
+#       context: ./GestSIS_APP
+#       dockerfile: Dockerfile
+#     volumes:
+#       - ./GestSIS_APP:/app
+#       - /app/node_modules
+#     environment:
+#       - SERVICE_NAME=frontend
+#       - CHOKIDAR_USEPOLLING=true
+#     ports:
+#       - "8080:8080"
+
+version: "3.7"
+services:
+  app:
+    build:
+      context: ./GestSIS_APP
+      dockerfile: Dockerfile
+    image: vue-dev:1.0
+    container_name: gestsis-app
+    restart: unless-stopped
+    tty: true
+    working_dir: /app
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./GestSIS_APP:/app
+      - /app/node_modules
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+    networks:
+      - gestsis
+    command: sh -c "cd /app/src && yarn install && yarn serve"
+    # depends_on:
+    #   - api
+    #   - auth
+
+  api:
+    build:
+      context: ./GestSIS_API
+      dockerfile: Dockerfile
+    image: laravel-dev:1.0
+    container_name: gestsis-api
+    restart: unless-stopped
+    tty: true
+    working_dir: /app
+    ports:
+      - 8000:8000
+    volumes:
+      - ./GestSIS_API:/app
+    networks:
+      - gestsis
+    depends_on:
+      - db
+    command: bash -c "composer install && php artisan migrate:reset && php artisan migrate && php artisan db:seed && php artisan serve --host=0.0.0.0 --port=8000"
+
+  auth:
+    build:
+      context: ./GestSIS_Auth
+      dockerfile: Dockerfile
+    image: laravel-dev:1.0
+    container_name: gestsis-auth
+    restart: unless-stopped
+    tty: true
+    working_dir: /app
+    ports:
+      - 8001:8001
+    volumes:
+      - ./GestSIS_Auth:/app
+    networks:
+      - gestsis
+    depends_on:
+      - db
+    command: bash -c "composer install && php artisan migrate:reset && php artisan migrate && php artisan db:seed && php artisan serve --host=0.0.0.0 --port=8001"
+
+  db:
+    image: mysql:5.7
+    container_name: gestsis-db
+    restart: unless-stopped
+    tty: true
+    environment:
+      MYSQL_DATABASE: gestsis
+      MYSQL_ROOT_PASSWORD: pwd
+      MYSQL_PASSWORD: pwd
+      MYSQL_USER: gestsis
+      SERVICE_TAGS: dev
+      SERVICE_NAME: mysql
+    volumes:
+      - ./docker-compose/mysql:/docker-entrypoint-initdb.d
+    networks:
+      - gestsis
+  
+networks:
+  gestsis:
+    driver: bridge
