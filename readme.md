@@ -34,3 +34,7 @@ Un script de config séparé a été créé pour chaque projet afin qu'il soit p
 - Génération des fichiers .env de config des projets Laravel à la volée.
 - Génération d'un script permettant de nettoyer les dépendances des projets notemment le dossier vendor des projets Laravel.
 - La config actuelle nécessite deux databases et le fichier de config `docker-compose\mysql\gestsis.sql` est hardcodé.
+
+## Utilisation avec Docker-Desktop et WSL2.0
+
+Attention, le système peut se révéler particulièrement lent si ce projet se trouve sur une partition windows et non pas sur le filesystem de wsl. Faites attention de bien être dans le disque virtuel de votre distro `\\wsl$\DISTRO_NAME` et non pas sur une partition de votre windows monté sur le système linux !
