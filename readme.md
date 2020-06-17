@@ -7,7 +7,6 @@ Ce repo permet d'automatiser la création de l'environnement de dev pour le proj
 Une fois le projet cloné, il suffit d'executer une fois le script `init.sh` pour tout configurer :
 
 ```sh
-chmod +x init.sh
 ./init.sh
 ```
 
