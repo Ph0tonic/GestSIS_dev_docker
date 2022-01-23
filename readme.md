@@ -21,6 +21,10 @@ Il est ainsi possible de modifier le code source en live directement depuis cet 
 - API -> localhost:8000
 - Auth -> localhost:8001
 
+Un compte de base a été pré-configuré automatiquement :
+- email: test@gmail.com
+- pwd: apptest
+
 ## Arrêt du système
 
 La comande suivante permet d'arrêter les différents containers.
