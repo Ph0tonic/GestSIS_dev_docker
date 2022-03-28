@@ -4,7 +4,7 @@ services:
     build:
       context: ./GestSIS_APP
       dockerfile: Dockerfile
-    image: vue-dev:1.0
+    image: vue-dev:2.0
     container_name: gestsis-app
     restart: unless-stopped
     tty: true
@@ -18,7 +18,7 @@ services:
       - CHOKIDAR_USEPOLLING=true
     networks:
       - gestsis
-    command: sh -c "cd /app/src && yarn install && yarn serve"
+    command: sh -c "cd /app/src && yarn install && yarn dev --host --port=8080"
     # depends_on:
     #   - api
     #   - auth
@@ -60,7 +60,7 @@ services:
       - gestsis
     depends_on:
       - db
-    command: bash -c "composer install && php artisan migrate:reset && php artisan migrate && php artisan db:seed && php artisan serve --host=0.0.0.0 --port=8001"
+    command: bash -c "composer install && php artisan migrate:fresh --seed && php artisan serve --host=0.0.0.0 --port=8001"
 
   db:
     image: mysql:8.0.21
