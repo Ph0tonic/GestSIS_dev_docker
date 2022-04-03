@@ -27,7 +27,7 @@ services:
     build:
       context: ./GestSIS_API
       dockerfile: Dockerfile
-    image: laravel-api:2.0
+    image: laravel-api:2.1
     container_name: gestsis-api
     restart: unless-stopped
     tty: true
