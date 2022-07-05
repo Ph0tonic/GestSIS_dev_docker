@@ -62,6 +62,24 @@ services:
       - db
     command: bash -c "composer install && php artisan migrate:fresh --seed && php artisan serve --host=0.0.0.0 --port=8001"
 
+  print:
+    build:
+      context: ./GestSIS_Print
+      dockerfile: Dockerfile
+    image: node-dev:1.3
+    container_name: gestsis-print
+    restart: unless-stopped
+    tty: true
+    working_dir: /app
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./GestSIS_Print:/app
+      - /app/node_modules
+    networks:
+      - gestsis
+    command: sh -c "yarn && node app.js"
+
   db:
     image: mysql:8.0.21
     container_name: gestsis-db
@@ -78,7 +96,7 @@ services:
       - ./docker-compose/mysql:/docker-entrypoint-initdb.d
     networks:
       - gestsis
-  
+
 networks:
   gestsis:
     driver: bridge
