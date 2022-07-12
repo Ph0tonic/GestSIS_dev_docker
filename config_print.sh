@@ -1,7 +1,7 @@
-# GestSIS_API
+# GestSIS_Print
 
 # Initialisation du fichier de config
-cp ./GestSIS_API/.env.docker ./GestSIS_API/.env
+cp ./GestSIS_Print/.env.docker ./GestSIS_Print/.env
 
 # Config des clés pour GestSIS API
 mkdir ./GestSIS_Print/keys
