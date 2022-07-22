@@ -81,8 +81,26 @@ services:
       - gestsis
     command: sh -c "yarn && yarn dev"
 
+  alarm:
+    build:
+      context: ./GestSIS_Alarm
+      dockerfile: Dockerfile
+    image: python-dev:1.0
+    container_name: gestsis-alarm
+    restart: unless-stopped
+    tty: true
+    working_dir: /app
+    ports:
+      - "8002:8002"
+    volumes:
+      - ./GestSIS_Alarm:/app
+    networks:
+      - gestsis
+    command: >
+      sh -c "pip install -r requirements.txt && python init.py -f && cd gestsis_alarm && python manage.py migrate && python manage.py loaddata sis && python manage.py runserver 0.0.0.0:8002"
+
   db:
-    image: mysql:8.0.21
+    image: mysql:8.0.29
     container_name: gestsis-db
     restart: unless-stopped
     tty: true

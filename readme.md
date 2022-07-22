@@ -20,6 +20,8 @@ Il est ainsi possible de modifier le code source en live directement depuis cet 
 - APP -> localhost:8080
 - API -> localhost:8000
 - Auth -> localhost:8001
+- Alarm -> localhost:8002
+- Print -> localhost:3000
 
 Un compte de base a été pré-configuré automatiquement :
 - email: test@gmail.com
@@ -45,4 +47,4 @@ Attention, le système peut se révéler particulièrement lent si ce projet se 
 
 - Génération des fichiers .env de config des projets Laravel à la volée.
 - Génération d'un script permettant de nettoyer les dépendances des projets notemment le dossier vendor des projets Laravel.
-- La config actuelle nécessite deux databases et le fichier de config `docker-compose\mysql\gestsis.sql` est hardcodé.
+- La config actuelle nécessite plusieurs databases et le fichier de config `docker-compose\mysql\gestsis.sql` est hardcodé.
