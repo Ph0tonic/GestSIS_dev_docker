@@ -85,7 +85,7 @@ services:
     build:
       context: ./GestSIS_Alarm
       dockerfile: Dockerfile
-    image: python-dev:1.0
+    image: python-dev:1.2
     container_name: gestsis-alarm
     restart: unless-stopped
     tty: true
@@ -97,7 +97,7 @@ services:
     networks:
       - gestsis
     command: >
-      sh -c "pip install -r requirements.txt && python init.py -f && cd gestsis_alarm && python manage.py migrate && python manage.py loaddata sis && python manage.py runserver 0.0.0.0:8002"
+      sh -c "pip install -r requirements.txt && python _scripts/init.py -f && python manage.py migrate && python manage.py loaddata sis && python manage.py runserver 0.0.0.0:8002"
 
   db:
     image: mysql:8.0.29
