@@ -48,7 +48,7 @@ services:
     build:
       context: ./GestSIS_Auth
       dockerfile: Dockerfile
-    image: laravel-auth:2.0
+    image: laravel-auth:2.1
     container_name: gestsis-auth
     restart: unless-stopped
     tty: true
