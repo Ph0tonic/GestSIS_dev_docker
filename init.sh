@@ -4,6 +4,7 @@ git clone git@github.com:Ph0tonic/GestSIS_API.git
 git clone git@github.com:Ph0tonic/GestSIS_APP.git
 git clone git@github.com:Ph0tonic/GestSIS_Print.git
 git clone git@github.com:Ph0tonic/GestSIS_Alarm.git
+git clone git@github.com:Ph0tonic/GestSIS_Doc.git
 
 # Génération d'une nouvelle clé ssh pour le système d'authentification
 mkdir rsa_keys

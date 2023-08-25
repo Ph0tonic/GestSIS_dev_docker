@@ -1,10 +1,25 @@
 version: "3.7"
 services:
+  doc:
+    image: retypeapp/retype:3.2-ubuntu
+    container_name: gestsis-doc
+    restart: unless-stopped
+    tty: true
+    working_dir: /app
+    ports:
+      - "8081:8081"
+    volumes:
+      - ./GestSIS_Doc:/app
+      - /app/node_modules
+    networks:
+      - gestsis
+    command: retype watch --port=8081
+
   app:
     build:
       context: ./GestSIS_APP
       dockerfile: Dockerfile
-    image: vue-dev:2.0
+    image: vue-dev:2.1
     container_name: gestsis-app
     restart: unless-stopped
     tty: true
@@ -27,7 +42,7 @@ services:
     build:
       context: ./GestSIS_API
       dockerfile: Dockerfile
-    image: laravel-api:2.3
+    image: laravel-api:2.4
     container_name: gestsis-api
     restart: unless-stopped
     tty: true
@@ -48,7 +63,7 @@ services:
     build:
       context: ./GestSIS_Auth
       dockerfile: Dockerfile
-    image: laravel-auth:2.1
+    image: laravel-auth:2.2
     container_name: gestsis-auth
     restart: unless-stopped
     tty: true
@@ -67,7 +82,7 @@ services:
     build:
       context: ./GestSIS_Print
       dockerfile: Dockerfile
-    image: node-dev:1.3
+    image: node-dev:1.4
     container_name: gestsis-print
     restart: unless-stopped
     tty: true
@@ -85,7 +100,7 @@ services:
     build:
       context: ./GestSIS_Alarm
       dockerfile: Dockerfile
-    image: python-dev:1.2
+    image: python-dev:1.3
     container_name: gestsis-alarm
     restart: unless-stopped
     tty: true
@@ -100,7 +115,7 @@ services:
       sh -c "pip install -r requirements.txt && python _scripts/init.py -f && python manage.py migrate && python manage.py loaddata sis && python manage.py runserver 0.0.0.0:8002"
 
   db:
-    image: mysql:8.0.29
+    image: mysql:8.1
     container_name: gestsis-db
     restart: unless-stopped
     tty: true
