@@ -1,7 +1,7 @@
-version: "3.7"
+version: "3.8"
 services:
   doc:
-    image: retypeapp/retype:3.2-ubuntu
+    image: retypeapp/retype:3.5-ubuntu
     container_name: gestsis-doc
     restart: unless-stopped
     tty: true
