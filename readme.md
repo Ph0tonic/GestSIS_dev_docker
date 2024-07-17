@@ -13,7 +13,7 @@ Une fois le projet cloné, il suffit d'executer une fois le script `init.sh` pou
 Ce script va cloner les différents sous-modules requis et les configurer. Une fois cette étape réalisée il ne reste plus qu'à exécuter la comande suivante pour lancer les containers.
 
 ```sh
-docker-compose up
+docker compose up
 ```
 
 Il est ainsi possible de modifier le code source en live directement depuis cet OS. Voici les urls des différents services :
@@ -32,7 +32,7 @@ Un compte de base a été pré-configuré automatiquement :
 La comande suivante permet d'arrêter les différents containers.
 
 ```sh
-docker-compose down
+docker compose down
 ```
 
 ## Informations complémentaires
