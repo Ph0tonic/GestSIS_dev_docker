@@ -6,7 +6,7 @@ services:
     tty: true
     working_dir: /app
     ports:
-      - "8081:8081"
+      - 8081:8081
     volumes:
       - ./GestSIS_Doc:/app
       - /app/node_modules
@@ -24,7 +24,7 @@ services:
     tty: true
     working_dir: /app
     ports:
-      - "8080:8080"
+      - 8080:8080
     volumes:
       - ./GestSIS_APP:/app
       - /app/node_modules
@@ -55,7 +55,6 @@ services:
       - gestsis
     depends_on:
       - db
-    # command: bash -c "composer install && php artisan migrate:reset && php artisan migrate && php artisan db:seed && php artisan serve --host=0.0.0.0 --port=8000"
     command: bash -c "composer install && php artisan dbs:init && php artisan serve --host=0.0.0.0 --port=8000"
 
   auth:
@@ -87,7 +86,7 @@ services:
     tty: true
     working_dir: /app
     ports:
-      - "3000:3000"
+      - 3000:3000
     volumes:
       - ./GestSIS_Print:/app
       - /app/node_modules
@@ -105,7 +104,7 @@ services:
     tty: true
     working_dir: /app
     ports:
-      - "8002:8002"
+      - 8002:8002
     volumes:
       - ./GestSIS_Alarm:/app
     networks:
