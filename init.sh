@@ -2,7 +2,6 @@
 git clone git@github.com:Ph0tonic/GestSIS_Auth.git
 git clone git@github.com:Ph0tonic/GestSIS_API.git
 git clone git@github.com:Ph0tonic/GestSIS_APP.git
-git clone git@github.com:Ph0tonic/GestSIS_Print.git
 git clone git@github.com:Ph0tonic/GestSIS_Alarm.git
 git clone git@github.com:Ph0tonic/GestSIS_Doc.git
 
@@ -22,10 +21,6 @@ chmod +x ./config_api.sh
 # Config GestSIS APP
 chmod +x ./config_app.sh
 ./config_app.sh
-
-# Config GestSIS Print
-chmod +x ./config_print.sh
-./config_print.sh
 
 # Config GestSIS Alarm
 chmod +x ./config_alarm.sh

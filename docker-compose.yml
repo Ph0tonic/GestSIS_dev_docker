@@ -1,6 +1,9 @@
 services:
   doc:
-    image: retypeapp/retype:3.5-ubuntu
+    build:
+      context: ./GestSIS_Doc
+      dockerfile: Dockerfile
+    image: retype:1.0
     container_name: gestsis-doc
     restart: unless-stopped
     tty: true
@@ -12,13 +15,13 @@ services:
       - /app/node_modules
     networks:
       - gestsis
-    command: retype start --port=8081
+    command: sh -c "yarn && yarn docs:dev --port 8081 --host 0.0.0.0"
 
   app:
     build:
       context: ./GestSIS_APP
       dockerfile: Dockerfile
-    image: vue-dev:2.1
+    image: vue-dev:2.3
     container_name: gestsis-app
     restart: unless-stopped
     tty: true
@@ -66,6 +69,8 @@ services:
     restart: unless-stopped
     tty: true
     working_dir: /app
+    environment:
+      PHP_MEMORY_LIMIT: 2048M
     ports:
       - 8001:8001
     volumes:
@@ -75,24 +80,6 @@ services:
     depends_on:
       - db
     command: bash -c "composer install && php artisan migrate:fresh --seed && php artisan serve --host=0.0.0.0 --port=8001"
-
-  print:
-    build:
-      context: ./GestSIS_Print
-      dockerfile: Dockerfile
-    image: node-dev:1.5
-    container_name: gestsis-print
-    restart: unless-stopped
-    tty: true
-    working_dir: /app
-    ports:
-      - 3000:3000
-    volumes:
-      - ./GestSIS_Print:/app
-      - /app/node_modules
-    networks:
-      - gestsis
-    command: sh -c "yarn && yarn dev"
 
   alarm:
     build:
