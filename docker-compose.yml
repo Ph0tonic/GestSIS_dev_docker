@@ -118,4 +118,5 @@ services:
 
 networks:
   gestsis:
+    name: gestsis
     driver: bridge
