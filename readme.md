@@ -21,7 +21,6 @@ Il est ainsi possible de modifier le code source en live directement depuis cet 
 - API -> localhost:8000
 - Auth -> localhost:8001
 - Alarm -> localhost:8002
-- Print -> localhost:3000
 
 Un compte de base a été pré-configuré automatiquement :
 - email: test@gmail.com
