@@ -97,7 +97,7 @@ services:
     networks:
       - gestsis
     command: >
-      sh -c "pip install -r requirements.txt && python _scripts/init.py -f && python manage.py migrate && python manage.py loaddata sis && python manage.py runserver 0.0.0.0:8002"
+      sh -c "uv sync && uv run _scripts/init.py -f && uv run manage.py migrate && uv run manage.py loaddata sis && uv run manage.py runserver 0.0.0.0:8002"
 
   db:
     image: mysql:8.1
