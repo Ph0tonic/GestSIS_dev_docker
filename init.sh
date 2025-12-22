@@ -7,7 +7,7 @@ git clone git@github.com:Ph0tonic/GestSIS_Doc.git
 
 # Génération d'une nouvelle clé ssh pour le système d'authentification
 mkdir rsa_keys
-openssl genrsa -out ./rsa_keys/auth-private.key 1024
+openssl genrsa -out ./rsa_keys/auth-private.key 4096
 openssl rsa -pubout -in ./rsa_keys/auth-private.key -out ./rsa_keys/auth-public.key
 
 # Config GestSIS Auth
