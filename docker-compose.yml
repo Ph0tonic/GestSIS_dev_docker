@@ -104,6 +104,11 @@ services:
     container_name: gestsis-db
     restart: unless-stopped
     tty: true
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
     environment:
       MYSQL_DATABASE: gestsis
       MYSQL_ROOT_PASSWORD: pwd
